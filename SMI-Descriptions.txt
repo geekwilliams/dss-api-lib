@@ -290,6 +290,32 @@ Model:
 
 }http://localhost:8080/dcinema/ws/smi/v1/TransferManagementService
 
+	}--->>"transferContentRequest"
+		}---networkTransferType(optional) - str - ("PULL")
+		}---transferProtocolType(optional) - str - ("FTP")
+		}---contentType - str
+			}--CLIP, SHOW, LICENSE
+		}---auditoriumNumber(optional) - int
+		}---url - str
+		}---userName(optional) - str
+		}---password(optional) - str
+
+	}--->>"getTransfersRequest"
+		}---auditoriumNumber(optional) - int
+	
+	}--->>"getTransferInfosRequest"
+		}---transferId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+
+	}--->>"cancelTransferRequest"
+		}---transferId - uuid
+
+	}--->>"clearTransferHistoryRequest"
+		}---auditoriumNumber(optional) - int
+
+-------------------------------------------------------------------
+
+
 
 
 
