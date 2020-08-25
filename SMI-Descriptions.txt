@@ -1,0 +1,298 @@
+***********************Dolby SMI Description***********************
+
+Model: 
+
+}Enpoint
+     }--->>call
+	     }--->>options
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/ContentManagementService
+     
+	}--->>"getClipsRequest"
+		}---auditoriumNumber(optional) - int
+		}---contentStore(optional) - str
+
+	}--->>"getClipInfosRequest"
+		}---clipId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+	
+	}--->>"getCPLRequest"
+		}---clipId(required) - uuid
+
+	}--->>"getPackagesRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"getPackageInfosRequest"
+		}---packageId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+
+	}--->>"ingestContentRequest"     
+		}---contentId(required/many) - uuid
+		}---auditoriumNumber(optional) - int
+		}--->contentType(optional)
+			}--CLIP - str-literal
+			}--PKL - str-literal
+
+	}--->>"deleteContentRequest"
+		}---contentId(required) - uuid
+		}---contentType(optional) - str-literal
+		}---auditoriumNumber(optional) - int
+		}---contentStore(optional) - str
+
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/LicenseManagementService
+
+	}--->>"getLicensesRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"getLicenseInfosRequest"
+		}---licenseId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+
+	}--->>"getKDMRequest"
+		}---licenseId - uuid
+	
+	}--->>"ingestLicensesRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"getLicenseIngestInfoRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"cancelLicenseIngestRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"sentLicenseRequest"
+		}---keyDeliveryMessage - xml
+
+	}--->>"getLicenseLoadStateRequest"
+		}---auditoriumNumber(optional) - int
+
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/PlaybackControlService
+
+	}--->>"getPlaybackStateRequest"
+		
+	}--->>"selectContentRequest"
+		}---contentId(required) - uuid
+		}---playableContentType(optional) - str-literal
+
+	}--->>"playRequest"
+		
+	}--->>"stopRequest"
+
+	}--->>"pauseRequest"
+
+	}--->>"nextRequest"
+
+	}--->>"previousRequest"
+
+	}--->>"getScheduleModeRequest"
+
+	}--->>"setScheduleModeRequest"
+		}---scheduleMode - bool
+
+	}--->>"setPlaybackModeRequest"
+		}---playbackMode - str-literal
+			}--2D, 3D, Dolby 3D
+
+	}--->>"goToPositionRequest"
+		}---position - int/str
+
+	}--->>"fireCueRequest"
+		}---cuId(required) - uuid
+		}---parameterizedValue(optional)
+
+	}--->>"getPurgeSuiteStateRequest"
+	
+	}--->>"getAutoPlaybackModeRequest"
+
+	}--->>"setAutoPlaybackModeRequest"
+		}---autoPlaybackMode - str-literal
+			}--Manual, 3D, Dolby 3D
+
+	}--->>"getPrepSuiteStateRequest"
+		
+	}--->>"getPlaybackState2Request"
+	
+	}--->>"setPlaybackMode2Request"
+		}---playbackMode - str-literal
+			}--2D, 3D, Dolby 3D, RealD
+
+	}--->>"getAutoPlaybackMode2Request"
+
+	}--->>"setAutoPlaybackMode2Request"
+		}---autoPlaybackMode - str-literal
+			}--Manual, 3D, Dolby 3D, RealD
+
+	}--->>"inputSelectRequest"
+		}---inputSelectSource - str-literal
+			}--hdmi, hd-sdi
+
+	}--->>"getInputSelectRequest"
+
+	}--->>"getInputContentPropertiesRequest"
+
+	}--->>"getAutoInputSelectRequest"
+
+	}--->>"autoInputSelectRequest"
+		}---autoInputSelectMode - str-literal
+			}--hdmi, hd-sdi
+
+	}--->>"setVolumeRequest"
+		}---volume - float(0.0-10.0)
+
+	}--->>"getVolumeRequest"
+	
+	}--->>"setMuteRequest"
+		}---isMuted - bool
+
+	}--->>"getMuteRequest"
+
+	}--->>"setDouserRequest"
+		}---isDoused - bool
+
+	}--->>"getDouserRequest"
+
+	}--->>"setLampRequest"
+		}---isStruck - bool
+
+	}--->>"getLampRequest"
+
+	}--->>"getSubtitleDecryptionStateRequest"
+
+	}--->>"cancelSubtitleDecryptionRequest"
+
+
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/ShowManagementService
+
+	}--->>"getShowsRequest"
+
+	}--->>"getShowInfosRequest"
+		}---showId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+	
+	}--->>"getSPLRequest"
+		}---showIt - uuid
+
+	}--->>"getCueInfosRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"createShowRequest"
+		}---show - xml
+
+	}--->>"deleteShowRequest"
+		}---showId - uuid
+
+	}--->>"getShowTimesRequest"
+		}---auditoriumNumber(optional) - int
+		}---startTime(optional) - int
+		}---endTime(optional) - int
+
+	}--->>"getShowTimeInfosRequest"
+		}---showTimeId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+		}---startTime(optional) - int
+		}---endTime(optional) - int
+
+	}--->>"createShowTimesRequest"
+		}---showTime(many) 
+
+	}--->>"deleteShowTimesRequest"
+		}---showTimeId(many) - uuid
+
+	}--->>"getSPL2Request"
+		}---showId - uuid
+
+	}--->>"getSPL3Request"
+		}---showId - uuid
+
+	}--->>"getSPL4Request"
+		}---showId - uuid
+
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/SystemManagementService
+
+	}--->>"getAuditoriumsRequest"
+	
+	}--->>"getDeviceComponentsRequest"
+	
+	}--->>"getDeviceComponentInfosRequest"
+		}---deviceComponentId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+		}---deviceComponentType(optional) - str
+
+	}--->>"getContentStoresRequest"
+		}---auditoriumNumber(optional) - int
+	
+	}--->>"getSystemLogsRequest"
+		}---deviceComponentId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+		}---deviceComponentType(optional) - str
+		}---url - str
+		}---username(optional) - str
+		}---password(optional) - str
+	
+	}--->>"getSystemLogsStatusRequest"
+		}---logRetrievalId(optional) - uuid
+		}---deviceComponentId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+		}---deviceComponentType(optional) - str
+
+	}--->>"getAuditLogsRequest"
+		}---auditoriumNumber(optional) - int
+		}---url - str
+		}---username(optional) - str
+		}---password(optional) - str
+		}---startDate(optional) - int
+		}---endDate(optional) - int
+
+	}--->>"getAuditLogsStatusRequest"
+		}---logRetrievalId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+		
+	}--->>"cancelLogRetrievalRequest"
+		}---logRetrievalId - uuid
+
+	}--->>"getSystemTimeRequest"
+		
+	}--->>"setTimeZoneRequest"
+		}---timeZoneId - str (olson identifier)
+
+	}--->>"getSecureTimeRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"setSecureTimeRequest"
+		}---auditoriumNumber(optional) - int
+		}---secureTime - int
+
+	}--->>"getSecurityManagerCertificateRequest"
+		}---auditoriumNumber(optional) - int
+
+	}--->>"getPlaybackLogsRequest"
+		}---auditoriumNumber(optional) - int
+		}---url - str
+		}---username(optional) - str
+		}---password(optional) - str
+		}---startDate(optional) - int
+		}---endDate(optional) - int
+
+	}--->>"getPlaybackLogsStatusRequest"
+		}---logRetrievalId(optional) - uuid
+		}---auditoriumNumber(optional) - int
+
+-------------------------------------------------------------------
+
+}http://localhost:8080/dcinema/ws/smi/v1/TransferManagementService
+
+
+
+
+
+
+
